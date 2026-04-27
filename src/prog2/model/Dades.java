@@ -51,27 +51,50 @@ public class Dades implements InDades, Serializable {
         Exemplar exemplar = exemplars.getAt(exemplarPos);
         Usuari usuari = usuaris.getAt(usuariPos);
 
-        if (esLlarg && exemplar.isDisponible()){
-             prestec = new PrestecLlarg(exemplar,usuari,new Date());
-        }else{
-             prestec = new PrestecNormal(exemplar,usuari,new Date());
-        }
-
-       if (!exemplar.isDisponible()) {
+       if (!exemplar.isDisponible()){
            throw new BiblioException("L'exemplar no esta disponible");
-       }else{
-           if (esLlarg){
-               if (exemplar.getAdmetPrestecLlarg()){
-                   prestec = new PrestecLlarg(exemplar,usuari,new Date());
-               }else{
-                   throw new BiblioException("L'exemplar no s'admet prestec llarg");
-               }
-           }else{
-               prestec = new PrestecNormal(exemplar,usuari,new Date());
+       }
+       if (esLlarg && !exemplar.getAdmetPrestecLlarg()){
+           throw new BiblioException("L'exemplar no s'admet prestec llarg");
+       }
+
+       // Verifica si l'usuari te presctecs endarrerits
+       Iterator<Prestec> it = this.prestecs.getArrayList().iterator();
+       while (it.hasNext()){
+           Prestec aux = it.next();
+           if (aux.getUsuari().equals(usuari) && aux.prestecEndarrerit()){
+              throw new BootstrapMethodError("L'usuari te presctecs endarrerits");
            }
        }
 
-        prestecs.afegir(prestec);
+       // Comprova si l'usuari excedeix el seu limit de presctecs
+        if (esLlarg){
+            if (usuari.getNumPrestecsLlargs() >= usuari.getMaxPrestecsLlargs()){
+                throw new BiblioException("Superat limit de prestecs llargs");
+            }
+        }else{
+            if (usuari.getNumPrestecsNormals() >= usuari.getMaxPrestecsNormals()){
+                throw new BiblioException("Superat limit de prestecs normals");
+            }
+        }
+
+        if (esLlarg){
+            prestec = new PrestecLlarg(exemplar,usuari,new Date());
+        }else{
+            prestec = new PrestecNormal(exemplar,usuari,new Date());
+        }
+
+        this.prestecs.afegir(prestec);
+
+        // Ha d'actualitzar els estats de l'usuari i de l'exemplar
+        exemplar.setDisponible(false);
+        if (esLlarg){
+            usuari.setNumPrestecsLlargs(usuari.getNumPrestecsLlargs() + 1);
+        }else{
+           usuari.setNumPrestecsNormals(usuari.getMaxPrestecsNormals() + 1);
+        }
+
+
     }
 
     @Override
