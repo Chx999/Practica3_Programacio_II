@@ -43,7 +43,7 @@ public class Exemplar implements InExemplar, Serializable {
 
     public void setDisponible(boolean disponible) { this.disponible = disponible; }
 
-    public boolean getDisponible() { return disponible; }
+    public boolean isDisponible() { return disponible; }
 
     @Override
     public String toString() {
