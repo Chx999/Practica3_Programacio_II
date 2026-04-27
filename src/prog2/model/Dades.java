@@ -62,8 +62,8 @@ public class Dades implements InDades, Serializable {
        Iterator<Prestec> it = this.prestecs.getArrayList().iterator();
        while (it.hasNext()){
            Prestec aux = it.next();
-           if (aux.getUsuari().equals(usuari) && aux.prestecEndarrerit()){
-              throw new BootstrapMethodError("L'usuari te presctecs endarrerits");
+           if (aux.getUsuari().equals(usuari) && !aux.getRetornat() && aux.prestecEndarrerit()){
+              throw new BiblioException("L'usuari te prestecs endarrerits");
            }
        }
 
@@ -91,7 +91,7 @@ public class Dades implements InDades, Serializable {
         if (esLlarg){
             usuari.setNumPrestecsLlargs(usuari.getNumPrestecsLlargs() + 1);
         }else{
-           usuari.setNumPrestecsNormals(usuari.getMaxPrestecsNormals() + 1);
+           usuari.setNumPrestecsNormals(usuari.getNumPrestecsNormals() + 1);
         }
 
 
@@ -99,7 +99,21 @@ public class Dades implements InDades, Serializable {
 
     @Override
     public void retornarPrestec(int position) throws BiblioException {
-        this.prestecs.getAt(position).retorna();
+        Prestec prestec = this.prestecs.getAt(position);
+
+        if (prestec.getRetornat()) {
+            throw new BiblioException("El prestec ja ha estat retornat");
+        }
+
+        prestec.retorna();
+        prestec.getExemplar().setDisponible(true);
+
+        Usuari usuari = prestec.getUsuari();
+        if (prestec instanceof PrestecLlarg) {
+            usuari.setNumPrestecsLlargs(usuari.getNumPrestecsLlargs() - 1);
+        } else {
+            usuari.setNumPrestecsNormals(usuari.getNumPrestecsNormals() - 1);
+        }
     }
 
     @Override
@@ -109,6 +123,14 @@ public class Dades implements InDades, Serializable {
 
     @Override
     public ArrayList<Prestec> recuperaPrestecsNoRetornats() {
-        return new ArrayList<>();
+        ArrayList<Prestec> noRetornats = new ArrayList<>();
+        Iterator<Prestec> it = this.prestecs.getArrayList().iterator();
+        while (it.hasNext()) {
+            Prestec p = it.next();
+            if (!p.getRetornat()) {
+                noRetornats.add(p);
+            }
+        }
+        return noRetornats;
     }
 }
