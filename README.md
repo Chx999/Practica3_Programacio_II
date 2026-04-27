@@ -2,8 +2,18 @@
 
 Proyecto de la **Práctica 3 de Programació II** (UB).
 
-## ✅ Estado actual (resumen rápido)
-El repositorio ya tiene estructura base (`model`, `adaptador`, `vista`) y tests unitarios, pero aún faltan varias implementaciones clave.
+## ✅ Estado actual (actualizado)
+El proyecto mantiene la estructura base (`model`, `adaptador`, `vista`) y batería de tests unitarios.
+
+### Avances recientes
+- [x] **Exemplar** unificado con `isDisponible()`.
+- [x] **Préstamos** actualizados para usar constructor con fecha:
+  - `Prestec(Exemplar, Usuari, Date)`
+  - `PrestecNormal(Exemplar, Usuari, Date)`
+  - `PrestecLlarg(Exemplar, Usuari, Date)`
+- [x] README reorganizado con checklist y reparto de trabajo.
+
+---
 
 ## 📌 Checklist de tareas pendientes
 
@@ -17,10 +27,8 @@ El repositorio ya tiene estructura base (`model`, `adaptador`, `vista`) y tests 
   - devolución,
   - guardado y carga de datos.
 
-### Media prioridad (consistencia entre código y tests)
-- [ ] Alinear API entre implementación y tests:
-  - `Exemplar`: decidir entre `getDisponible()` o `isDisponible()` y unificar.
-  - `PrestecNormal` / `PrestecLlarg`: añadir constructor con `Date` en tests o adaptar tests al constructor existente.
+### Media prioridad (consistencia y validaciones)
+- [x] Alinear API entre implementación y tests (disponibilidad de `Exemplar` + constructores de `Prestec`).
 - [ ] Revisar reglas de préstamos:
   - límites por tipo de usuario,
   - disponibilidad del ejemplar,
@@ -42,7 +50,7 @@ El repositorio ya tiene estructura base (`model`, `adaptador`, `vista`) y tests 
 
 ### tt (Integración + calidad)
 1. Implementar `Adaptador.java` (incluyendo persistencia: guardar/cargar).
-2. Alinear código y tests (`isDisponible/getDisponible`, constructores de `Prestec`).
+2. Verificar integración entre `Adaptador` y `Dades`.
 3. Ajustar/crear tests que fallen por cambios de interfaz y dejar suite en verde.
 
 ### Integración conjunta
@@ -52,11 +60,8 @@ El repositorio ya tiene estructura base (`model`, `adaptador`, `vista`) y tests 
 
 ---
 
-## 🗓️ Propuesta rápida de ejecución
-- **Día 1:** Chris termina `Llista` + base de `Dades`; tt termina `Adaptador` base.
-- **Día 2:** Resolver inconsistencias con tests y reglas de préstamo.
-- **Día 3:** Integración, pruebas finales y entrega.
-
----
-
-Si queréis, en el siguiente commit os preparo también una sección de **"Comandos para ejecutar"** (compilación + tests) para dejar el README totalmente listo para entrega.
+## 🗓️ Próximos pasos sugeridos
+- **Paso 1:** cerrar `Llista.java`.
+- **Paso 2:** cerrar `Dades.java` con reglas y excepciones.
+- **Paso 3:** conectar `Adaptador.java` + persistencia.
+- **Paso 4:** correr tests completos y preparar entrega.
