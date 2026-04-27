@@ -14,10 +14,10 @@ public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
         Iterator<Usuari> it = super.getArrayList().iterator();
         while (it.hasNext()){
             Usuari aux = it.next();
-            if (aux.getAdreca().equals(t.getAdreca())){
+            if (aux.getEmail().equals(t.getEmail())){
                 throw new BiblioException("NO es poden afegir dos usuaris amb el mateix correu elecctronic");
             }
         }
-        super.getArrayList().add(t);
+        super.afegir(t);
     }
 }

@@ -20,6 +20,6 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
                 throw new BiblioException("NO es poden afegir dos exemplars amb el mateix identificador");
             }
         }
-        super.getArrayList().add(t);
+        super.afegir(t);
     }
 }
