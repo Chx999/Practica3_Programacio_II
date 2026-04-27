@@ -11,9 +11,13 @@ public abstract class Prestec implements InPrestec, Serializable {
     private boolean retornat;
 
     public Prestec(Exemplar exemplar, Usuari usuari) {
+        this(exemplar, usuari, new Date());
+    }
+
+    public Prestec(Exemplar exemplar, Usuari usuari, Date dataCreacio) {
         this.exemplar = exemplar;
         this.usuari = usuari;
-        this.dataCreacio = new Date();
+        this.dataCreacio = dataCreacio;
         this.dataLimitRetorn = new Date(this.dataCreacio.getTime() + duradaPrestec());
         this.retornat = false;
     }
