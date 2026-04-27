@@ -4,11 +4,13 @@ import prog2.vista.BiblioException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 public class Dades implements InDades, Serializable {
-    private final LlistaExemplars exemplars;
-    private final LlistaUsuaris usuaris;
-    private final LlistaPrestecs prestecs;
+    private LlistaExemplars exemplars;
+    private LlistaUsuaris usuaris;
+    private LlistaPrestecs prestecs;
 
     public Dades() {
         this.exemplars = new LlistaExemplars();
@@ -18,7 +20,8 @@ public class Dades implements InDades, Serializable {
 
     @Override
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
-        throw new UnsupportedOperationException("TO-DO");
+        Exemplar exemplar = new Exemplar(id, titol, autor, admetPrestecLlarg);
+        this.exemplars.afegir(exemplar);
     }
 
     @Override
@@ -28,7 +31,13 @@ public class Dades implements InDades, Serializable {
 
     @Override
     public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
-        throw new UnsupportedOperationException("TO-DO");
+        Usuari usuari;
+        if (esEstudiant){
+             usuari = new Estudiant(email,nom,adreca);
+        }else{
+            usuari = new Professor(email,nom,adreca);
+        }
+        usuaris.afegir(usuari);
     }
 
     @Override
@@ -38,12 +47,36 @@ public class Dades implements InDades, Serializable {
 
     @Override
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
-        throw new UnsupportedOperationException("TO-DO");
+        Prestec prestec;
+        Exemplar exemplar = exemplars.getAt(exemplarPos);
+        Usuari usuari = usuaris.getAt(usuariPos);
+
+        if (esLlarg && exemplar.isDisponible()){
+             prestec = new PrestecLlarg(exemplar,usuari,new Date());
+        }else{
+             prestec = new PrestecNormal(exemplar,usuari,new Date());
+        }
+
+       if (!exemplar.isDisponible()) {
+           throw new BiblioException("L'exemplar no esta disponible");
+       }else{
+           if (esLlarg){
+               if (exemplar.getAdmetPrestecLlarg()){
+                   prestec = new PrestecLlarg(exemplar,usuari,new Date());
+               }else{
+                   throw new BiblioException("L'exemplar no s'admet prestec llarg");
+               }
+           }else{
+               prestec = new PrestecNormal(exemplar,usuari,new Date());
+           }
+       }
+
+        prestecs.afegir(prestec);
     }
 
     @Override
     public void retornarPrestec(int position) throws BiblioException {
-        throw new UnsupportedOperationException("TO-DO");
+        this.prestecs.getAt(position).retorna();
     }
 
     @Override
