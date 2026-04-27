@@ -13,7 +13,7 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
      */
     @Override
     public void afegir(Exemplar t) throws BiblioException {
-        Iterator<Exemplar> it = super.getArrayList().iterator();
+        Iterator<Exemplar> it = this.llista.iterator();
         while (it.hasNext()){
             Exemplar aux = it.next();
             if (aux.getId().equals(t.getId())){

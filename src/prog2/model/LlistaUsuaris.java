@@ -11,7 +11,7 @@ public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
      */
     @Override
     public void afegir(Usuari t) throws BiblioException {
-        Iterator<Usuari> it = super.getArrayList().iterator();
+        Iterator<Usuari> it = this.llista.iterator();
         while (it.hasNext()){
             Usuari aux = it.next();
             if (aux.getEmail().equals(t.getEmail())){
