@@ -51,6 +51,13 @@ public abstract class Prestec implements InPrestec, Serializable {
     @Override
     public void retorna() {
         this.retornat = true;
+        this.exemplar.setDisponible(true);
+
+        if (this instanceof PrestecLlarg) {
+            this.usuari.setNumPrestecsLlargs(this.usuari.getNumPrestecsLlargs() - 1);
+        } else {
+            this.usuari.setNumPrestecsNormals(this.usuari.getNumPrestecsNormals() - 1);
+        }
     }
 
     @Override

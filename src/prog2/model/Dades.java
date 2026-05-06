@@ -106,14 +106,6 @@ public class Dades implements InDades, Serializable {
         }
 
         prestec.retorna();
-        prestec.getExemplar().setDisponible(true);
-
-        Usuari usuari = prestec.getUsuari();
-        if (prestec instanceof PrestecLlarg) {
-            usuari.setNumPrestecsLlargs(usuari.getNumPrestecsLlargs() - 1);
-        } else {
-            usuari.setNumPrestecsNormals(usuari.getNumPrestecsNormals() - 1);
-        }
     }
 
     @Override
