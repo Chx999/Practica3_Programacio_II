@@ -20,4 +20,15 @@ public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
         }
         super.afegir(t);
     }
+
+    public boolean contains(String email) {
+        Iterator<Usuari> it = this.llista.iterator();
+        while (it.hasNext()) {
+            Usuari u = it.next();
+            if (u.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -3,7 +3,6 @@ package prog2.model;
 import prog2.vista.BiblioException;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
@@ -21,5 +20,16 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
             }
         }
         super.afegir(t);
+    }
+
+    public boolean contains(String id) {
+        Iterator<Exemplar> it = this.llista.iterator();
+        while (it.hasNext()) {
+            Exemplar e = it.next();
+            if (e.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
