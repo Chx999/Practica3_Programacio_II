@@ -27,13 +27,13 @@ public class Adaptador {
     }
 
     public List<String> recuperaExemplars() {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> resultado = new ArrayList<>();
         Iterator<Exemplar> it = dades.recuperaExemplars().iterator();
         while (it.hasNext()) {
-            Exemplar e = it.next();
-            result.add(e.toString());
+            Exemplar exemplar = it.next();
+            resultado.add(exemplar.toString());
         }
-        return result;
+        return resultado;
     }
 
     public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
@@ -41,13 +41,13 @@ public class Adaptador {
     }
 
     public List<String> recuperaUsuaris() {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> resultado = new ArrayList<>();
         Iterator<Usuari> it = dades.recuperaUsuaris().iterator();
         while (it.hasNext()) {
-            Usuari u = it.next();
-            result.add(u.toString());
+            Usuari usuari = it.next();
+            resultado.add(usuari.toString());
         }
-        return result;
+        return resultado;
     }
 
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
@@ -59,23 +59,23 @@ public class Adaptador {
     }
 
     public List<String> recuperaPrestecs() {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> resultado = new ArrayList<>();
         Iterator<Prestec> it = dades.recuperaPrestecs().iterator();
         while (it.hasNext()) {
-            Prestec p = it.next();
-            result.add(p.toString());
+            Prestec prestec = it.next();
+            resultado.add(prestec.toString());
         }
-        return result;
+        return resultado;
     }
 
     public List<String> recuperaPrestecsNoRetornats() {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> resultado = new ArrayList<>();
         Iterator<Prestec> it = dades.recuperaPrestecsNoRetornats().iterator();
         while (it.hasNext()) {
             Prestec p = it.next();
-            result.add(p.toString());
+            resultado.add(p.toString());
         }
-        return result;
+        return resultado;
     }
 
     public void guardaDades(String camiDesti) throws BiblioException {
