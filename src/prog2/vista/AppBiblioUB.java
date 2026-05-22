@@ -84,7 +84,7 @@ public class AppBiblioUB extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 FrmGestioPrestecs finestraPrestecs = new FrmGestioPrestecs(AppBiblioUB.this, adaptador);
                 JOptionPane.showMessageDialog(AppBiblioUB.this, "Opció: Gestió Préstecs, mostrar informació:","Informacio", JOptionPane.INFORMATION_MESSAGE);
-
+                finestraPrestecs.setVisible(true);
             }
         });
 
@@ -94,6 +94,7 @@ public class AppBiblioUB extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 FrmGestioExemplars finestraExemplars = new FrmGestioExemplars(AppBiblioUB.this, adaptador);
                 JOptionPane.showMessageDialog(AppBiblioUB.this, "Opció: Gestió Exemplars, mostrar informació:","Informacio", JOptionPane.INFORMATION_MESSAGE);
+                finestraExemplars.setVisible(true);
             }
         });
 

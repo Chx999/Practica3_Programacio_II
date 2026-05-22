@@ -141,6 +141,14 @@ public class FrmGestioUsuaris extends JDialog {
 
             }
         });
+
+        //boto cancelar
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
 }
