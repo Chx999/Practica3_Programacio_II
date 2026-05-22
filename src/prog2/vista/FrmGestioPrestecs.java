@@ -26,7 +26,7 @@ public class FrmGestioPrestecs extends JDialog {
         super(original, "Gestió de Préstecs", true);
         this.adaptador = adaptador;
 
-        setSize(750, 450);
+        setSize(600, 400);
         setLocationRelativeTo(original);
         setLayout(new BorderLayout(15, 15));
 
