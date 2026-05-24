@@ -16,6 +16,13 @@ public abstract class Prestec implements InPrestec, Serializable {
     private Date dataLimitRetorn;
     private boolean retornat;
 
+    /**
+     * Crea un préstec nou associat a un exemplar i un usuari.
+     *
+     * @param exemplar exemplar prestat
+     * @param usuari usuari que rep el préstec
+     * @param dataCreacio data de creació del préstec
+     */
     public Prestec(Exemplar exemplar, Usuari usuari, Date dataCreacio) {
         this.exemplar = exemplar;
         this.usuari = usuari;
@@ -54,6 +61,10 @@ public abstract class Prestec implements InPrestec, Serializable {
     @Override
     public boolean getRetornat() { return retornat; }
 
+    /**
+     * Marca el préstec com a retornat i actualitza l'estat associat
+     * de l'exemplar i del comptador de préstecs de l'usuari.
+     */
     @Override
     public void retorna() {
         this.retornat = true;
@@ -66,11 +77,21 @@ public abstract class Prestec implements InPrestec, Serializable {
         }
     }
 
+    /**
+     * Indica si el préstec està fora de termini a data actual.
+     *
+     * @return true si no està retornat i la data límit ja ha passat
+     */
     @Override
     public boolean prestecEndarrerit() {
         return !retornat && new Date().after(dataLimitRetorn);
     }
 
+    /**
+     * Retorna una representació textual del préstec per mostrar a la vista.
+     *
+     * @return cadena amb les dades principals del préstec
+     */
     @Override
     public String toString() {
         return "Tipus=" + tipusPrestec() + ", Exemplar=" + exemplar.getTitol() + ", Usuari=" + usuari.getNom()
