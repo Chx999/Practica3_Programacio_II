@@ -2,6 +2,10 @@ package prog2.model;
 
 import java.io.Serializable;
 
+/**
+ * Representa un exemplar bibliogràfic de la biblioteca.
+ * Inclou les dades identificatives i el seu estat de disponibilitat.
+ */
 public class Exemplar implements InExemplar, Serializable {
     private String id;
     private String titol;

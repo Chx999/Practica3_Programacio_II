@@ -2,6 +2,10 @@ package prog2.model;
 
 import java.io.Serializable;
 
+/**
+ * Classe base abstracta per als usuaris del sistema de biblioteca.
+ * Gestiona dades personals i comptadors de préstecs actius.
+ */
 public abstract class Usuari implements InUsuari, Serializable {
     private String email;
     private String nom;

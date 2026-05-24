@@ -3,6 +3,12 @@ package prog2.model;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Classe base abstracta per modelar un préstec d'un exemplar a un usuari.
+ *
+ * Defineix dades comunes (dates, estat retornat) i comportament general
+ * compartit pels diferents tipus de préstec.
+ */
 public abstract class Prestec implements InPrestec, Serializable {
     private Exemplar exemplar;
     private Usuari usuari;

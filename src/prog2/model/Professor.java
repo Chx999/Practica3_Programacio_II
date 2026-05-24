@@ -1,5 +1,8 @@
 package prog2.model;
 
+/**
+ * Tipus d'usuari professor amb límits de préstec específics.
+ */
 public class Professor extends Usuari {
     public Professor(String email, String nom, String adreca) {
         super(email, nom, adreca);

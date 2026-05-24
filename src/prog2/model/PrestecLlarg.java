@@ -2,6 +2,9 @@ package prog2.model;
 
 import java.util.Date;
 
+/**
+ * Implementació de préstec llarg.
+ */
 public class PrestecLlarg extends Prestec {
     public PrestecLlarg(Exemplar exemplar, Usuari usuari, Date dataCreacio) {
         super(exemplar, usuari, dataCreacio);

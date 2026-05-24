@@ -9,6 +9,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import prog2.vista.BiblioException;
 
+/**
+ * Contenidor genèric basat en {@link ArrayList} per gestionar col·leccions
+ * del domini de l'aplicació.
+ *
+ * @param <T> tipus d'element emmagatzemat a la llista
+ */
 public class Llista<T> implements Serializable {
    protected ArrayList<T> llista;
 

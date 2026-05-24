@@ -5,6 +5,9 @@ import prog2.vista.BiblioException;
 import java.io.Serializable;
 import java.util.Iterator;
 
+/**
+ * Llista especialitzada d'exemplars amb validacions de domini.
+ */
 public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
 
     /**

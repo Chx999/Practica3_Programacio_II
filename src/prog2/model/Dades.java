@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+/**
+ * Implementació principal del model de dades de la biblioteca.
+ * <p>
+ * Gestiona les col·leccions d'exemplars, usuaris i préstecs, i aplica
+ * les regles de negoci de l'aplicació.
+ * </p>
+ */
 public class Dades implements InDades, Serializable {
     private LlistaExemplars exemplars;
     private LlistaUsuaris usuaris;
@@ -18,17 +25,40 @@ public class Dades implements InDades, Serializable {
         this.prestecs = new LlistaPrestecs();
     }
 
+    /**
+     * Afegeix un nou exemplar a la col·lecció.
+     *
+     * @param id identificador únic de l'exemplar
+     * @param titol títol de l'exemplar
+     * @param autor autor de l'exemplar
+     * @param admetPrestecLlarg indica si admet préstec llarg
+     * @throws BiblioException si ja existeix un exemplar amb el mateix id
+     */
     @Override
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
         Exemplar exemplar = new Exemplar(id, titol, autor, admetPrestecLlarg);
         this.exemplars.afegir(exemplar);
     }
 
+    /**
+     * Recupera la llista d'exemplars.
+     *
+     * @return còpia de la llista d'exemplars
+     */
     @Override
     public ArrayList<Exemplar> recuperaExemplars() {
         return exemplars.getArrayList();
     }
 
+    /**
+     * Afegeix un nou usuari al sistema.
+     *
+     * @param email correu electrònic únic de l'usuari
+     * @param nom nom de l'usuari
+     * @param adreca adreça de l'usuari
+     * @param esEstudiant true si és estudiant; false si és professor
+     * @throws BiblioException si ja existeix un usuari amb el mateix email
+     */
     @Override
     public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
         Usuari usuari;
@@ -40,11 +70,24 @@ public class Dades implements InDades, Serializable {
         usuaris.afegir(usuari);
     }
 
+    /**
+     * Recupera la llista d'usuaris.
+     *
+     * @return còpia de la llista d'usuaris
+     */
     @Override
     public ArrayList<Usuari> recuperaUsuaris() {
         return usuaris.getArrayList();
     }
 
+    /**
+     * Afegeix un préstec nou fent les validacions de negoci necessàries.
+     *
+     * @param exemplarPos posició de l'exemplar dins la llista
+     * @param usuariPos posició de l'usuari dins la llista
+     * @param esLlarg true si el préstec és llarg
+     * @throws BiblioException si no es compleixen les restriccions de préstec
+     */
     @Override
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
         Prestec prestec;
@@ -97,6 +140,12 @@ public class Dades implements InDades, Serializable {
 
     }
 
+    /**
+     * Marca un préstec com a retornat.
+     *
+     * @param position posició del préstec dins la llista
+     * @throws BiblioException si el préstec ja havia estat retornat
+     */
     @Override
     public void retornarPrestec(int position) throws BiblioException {
         Prestec prestec = this.prestecs.getAt(position);
@@ -108,11 +157,21 @@ public class Dades implements InDades, Serializable {
         prestec.retorna();
     }
 
+    /**
+     * Recupera tots els préstecs registrats.
+     *
+     * @return còpia de la llista de préstecs
+     */
     @Override
     public ArrayList<Prestec> recuperaPrestecs() {
         return prestecs.getArrayList();
     }
 
+    /**
+     * Recupera només els préstecs que encara no han estat retornats.
+     *
+     * @return llista de préstecs no retornats
+     */
     @Override
     public ArrayList<Prestec> recuperaPrestecsNoRetornats() {
         ArrayList<Prestec> noRetornats = new ArrayList<>();

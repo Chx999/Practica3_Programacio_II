@@ -1,5 +1,8 @@
 package prog2.model;
 
+/**
+ * Tipus d'usuari estudiant amb límits de préstec específics.
+ */
 public class Estudiant extends Usuari {
     public Estudiant(String email, String nom, String adreca) {
         super(email, nom, adreca);

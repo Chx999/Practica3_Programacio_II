@@ -5,6 +5,9 @@ import prog2.vista.BiblioException;
 import java.io.Serializable;
 import java.util.Iterator;
 
+/**
+ * Llista especialitzada d'usuaris amb validacions de domini.
+ */
 public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
     /**
      * Afegir element a la llista. Afegeix l'element t a la llista
