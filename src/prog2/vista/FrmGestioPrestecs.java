@@ -173,14 +173,19 @@ public class FrmGestioPrestecs extends JDialog {
         btnRetornar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int pos = lstPrestecs.getSelectedIndex();
-                if (pos == -1) {
-                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this, "Has de seleccionar", "Error", JOptionPane.WARNING_MESSAGE);
+                String prestecSeleccionat = lstPrestecs.getSelectedValue();
+
+                if (prestecSeleccionat == null) {
+                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this, "Has de seleccionar un prestec", "Error", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+
+                List<String> totsElsPrestecs = adaptador.recuperaPrestecs();
+                int posReal = totsElsPrestecs.indexOf(prestecSeleccionat);
+
                 try {
-                    adaptador.retornarPrestec(pos);
-                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this, "Operacio finalitzada amb exit", "Èxit", JOptionPane.INFORMATION_MESSAGE);
+                    adaptador.retornarPrestec(posReal);
+                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this, "Operació finalitzada amb exit", "Èxit", JOptionPane.INFORMATION_MESSAGE);
                     refresh();
                 } catch (BiblioException exc) {
                     JOptionPane.showMessageDialog(FrmGestioPrestecs.this, exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
